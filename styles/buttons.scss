@@ -1,0 +1,43 @@
+@use '@angular/material' as mat;
+@use './variables.scss';
+@use './typography.scss';
+
+:root {
+  @include mat.button-overrides(
+    (
+      filled-container-color: variables.$rajah,
+      filled-label-text-color: variables.$white,
+      filled-container-shape: variables.$corners,
+      filled-container-height: variables.$density,
+
+      outlined-label-text-color: variables.$rajah,
+      outlined-container-shape: variables.$corners,
+      outlined-container-height: variables.$density,
+      outlined-outline-color: variables.$rajah,
+    )
+  );
+}
+
+.mdc-button {
+  transition: all 0.3s !important;
+  &__label {
+    @extend .caption-1;
+  }
+
+  &--outlined {
+    @extend ._outlined-button-hover;
+  }
+
+  &--unelevated:hover {
+    -webkit-box-shadow: 8px 8px 24px -3px rgba(202, 202, 202, 1);
+    -moz-box-shadow: 8px 8px 24px -3px rgba(202, 202, 202, 1);
+    box-shadow: 8px 8px 24px -3px rgba(202, 202, 202, 1);
+  }
+}
+
+._outlined-button-hover {
+  &:hover {
+    background-color: variables.$rajah;
+    color: variables.$white !important;
+  }
+}
