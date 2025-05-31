@@ -1,0 +1,23 @@
+@use './typography.scss';
+@use './variables.scss';
+
+
+.mdc-text-field {
+    &--filled:not(&--disabled) {
+        background-color: transparent !important;
+    }
+}
+
+.mdc-line-ripple {
+    display: none;
+}
+
+.mat-mdc-text-field-wrapper {
+    border: 1px solid variables.$rajah;
+    border-radius: variables.$corners !important;
+}
+
+.mdc-floating-label {
+    @extend .body-2;
+    color: variables.$rajah !important;
+}

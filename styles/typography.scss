@@ -1,0 +1,36 @@
+$maxHeadingSizeCode: 2;
+$maxBodySizeCode: 2;
+$maxCaptionSizeCode: 1;
+
+@for $i from 1 through $maxHeadingSizeCode {
+    $fontSize: calc(72px * (1 / pow(2, $i - 1)));
+
+    .h#{$i} {
+      font-family: 'Poppins', sans-serif !important;
+      font-weight: 700 !important;
+      font-size: $fontSize !important;
+      line-height: 1 !important;
+    }
+}
+
+@for $i from 1 through $maxBodySizeCode {
+    $fontSize: 24px - (($i - 1) * 8px);
+  
+    .body-#{$i} {
+      font-family: 'Poppins', sans-serif !important;
+      font-weight: 400 !important;
+      font-size: $fontSize !important;
+      line-height: 1 !important;
+    }
+}
+
+@for $i from 1 through $maxCaptionSizeCode {
+    $fontSize: 12px - (($i - 1) * 4px);
+  
+    .caption-#{$i} {
+      font-family: 'Poppins', sans-serif !important;
+      font-weight: 700 !important;
+      font-size: $fontSize !important;
+      line-height: 1 !important;
+    }
+}
