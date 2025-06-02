@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FrameComponent } from '../../core/components/frame/frame.component';
 import {
   FormArray,
@@ -32,6 +32,8 @@ import { MatIconModule } from '@angular/material/icon';
 export class NewComponent {
   public form: FormGroup;
   public noItemsAdded = signal(false);
+  public items = computed(() => this.form.get('items') as FormArray<FormGroup>);
+  public isAnyItemAdded = computed(() => this.items().controls.length === 0);
   private fb = inject(FormBuilder);
   private router = inject(Router);
 
@@ -67,20 +69,20 @@ export class NewComponent {
 
   public addItem(): void {
     this.noItemsAdded.update(status => status = false)
-    this.items.push(this.createItemGroup());
+    this.items().push(this.createItemGroup());
   }
 
   public removeItem(index: number): void {
-    this.items.removeAt(index);
+    this.items().removeAt(index);
   }
 
   public addInvoice() {
-    if(this.isAnyItemAdded){
+    if(this.isAnyItemAdded()){
       this.noItemsAdded.update(status => status = true)
     }
 
     if (!this.hasAtLeastOneValidItem()) {
-      this.items.controls.forEach((group) => {
+      this.items().controls.forEach((group) => {
         const fg = group as FormGroup;
         Object.values(fg.controls).forEach((ctrl) => ctrl.markAsTouched());
       });
@@ -93,14 +95,6 @@ export class NewComponent {
   }
 
   private hasAtLeastOneValidItem(): boolean {
-    return this.items.controls.some((control) => control.valid);
-  }
-
-  get items(): FormArray<FormGroup> {
-    return this.form.get('items') as FormArray<FormGroup>;
-  }
-
-  get isAnyItemAdded(){
-    return this.items.controls.length === 0
+    return this.items().controls.some((control) => control.valid);
   }
 }
