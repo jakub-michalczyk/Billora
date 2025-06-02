@@ -1,10 +1,19 @@
 @use './typography.scss';
 @use './variables.scss';
+@use '@angular/material' as mat;
 
+@include mat.form-field-overrides((
+    error-text-color: red
+));
+
+@include mat.snack-bar-overrides((
+    container-color: variables.$white,
+    container-shape: variables.$corners
+));
 
 .mdc-text-field {
     &--filled:not(&--disabled) {
-        background-color: transparent !important;
+        background-color: variables.$white !important;
     }
 }
 
@@ -20,4 +29,13 @@
 .mdc-floating-label {
     @extend .body-2;
     color: variables.$rajah !important;
+}
+
+.mat-mdc-form-field-error-wrapper {
+    padding: 0 !important;
+}
+
+.mat-mdc-snack-bar-label {
+    @extend .body-2;
+    text-align: center;
 }
