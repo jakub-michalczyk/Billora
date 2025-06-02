@@ -1,0 +1,41 @@
+<app-frame class="block w-full" imageName="summary.png">
+    <div>
+        <h2 class="h2">Company Info</h2>
+        <div class="mt-6 text-gray-550 mb-6">
+            @if(loading()){
+                <div class="h-16 flex items-center">
+                    <mat-spinner diameter="24" color="red"></mat-spinner>
+                </div>
+            }
+            @else {
+                <p class="body-1">{{ (companyData | async)?.name }}, {{ (companyData | async)?.address }}</p>
+                <p class="body-2 mt-2">{{ (companyData | async)?.phones }}</p>
+            }
+        </div>
+        <div>
+            @if(noItemsAdded()){
+                <div class="pt-6 border-t border-gray-300 body-1">No items.</div>
+            }
+            @else {
+                @for (item of items(); track $index) {
+                    <div class="py-6 border-b border-gray-300">
+                        <div class="flex">
+                            <div class="border-r border-gray-300 pr-6">
+                                {{ item.name }}
+                            </div>
+                            <div class="border-r border-gray-300 px-6">
+                                {{ item.count }}
+                            </div>
+                            <div class="pl-6">
+                                {{ item.price }}
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="h3 mt-12">
+                    Summary: <span class="text-orange-350">{{ getTotal() }}</span>
+                </div>
+            }
+        </div>
+    </div>
+</app-frame>
