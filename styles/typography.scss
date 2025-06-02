@@ -1,5 +1,5 @@
 $maxHeadingSizeCode: 2;
-$maxBodySizeCode: 2;
+$maxBodySizeCode: 3;
 $maxCaptionSizeCode: 1;
 
 @for $i from 1 through $maxHeadingSizeCode {
@@ -14,7 +14,15 @@ $maxCaptionSizeCode: 1;
 }
 
 @for $i from 1 through $maxBodySizeCode {
-    $fontSize: 24px - (($i - 1) * 8px);
+    $fontSize: 24px;
+
+    @if $i == 1 {
+      $fontSize: 24px;
+    } @else if $i == 2 {
+      $fontSize: 16px;
+    } @else {
+      $fontSize: 24px - 8px - (($i - 2) * 4px);
+    }
   
     .body-#{$i} {
       font-family: 'Poppins', sans-serif !important;

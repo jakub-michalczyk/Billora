@@ -1,8 +1,9 @@
 @use '@angular/material' as mat;
 @use "tailwindcss";
+@use "./../styles/theme";
 @use "./../styles/buttons";
 @use "./../styles/typography";
-@use "./../styles/theme";
+@import './../styles/tailwind.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

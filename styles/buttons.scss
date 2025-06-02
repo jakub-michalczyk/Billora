@@ -21,7 +21,7 @@
 .mdc-button {
   transition: all 0.3s !important;
   &__label {
-    @extend .caption-1;
+    @extend .body-3;
   }
 
   &--outlined {
