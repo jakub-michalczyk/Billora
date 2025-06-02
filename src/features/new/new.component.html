@@ -1,0 +1,118 @@
+<app-frame class="block w-full" imageName="new_invoice.png">
+    <div>
+        <h1 class="h1">New Invoice</h1>
+        <p class="body-2 sm:body-1">Just fill up the form to add a new invoice.</p>
+    </div>
+    <form class="mt-12" [formGroup]="form" (submit)="addInvoice()">
+        <div class="mt-12 flex flex-col gap-3">
+            @if(isAnyItemAdded){
+                <p class="body-2 text-gray-550">
+                    No items added.
+                </p>
+            }
+            @else {
+                @for(item of items.controls; track $index){
+                    <div [formGroup]="item" class="flex gap-3">
+                        <div class="w-full flex-col sm:flex-row flex gap-1 sm:gap-3">
+                            <mat-form-field class="w-full sm:w-2/3">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="Enter name of invoice" formControlName="name">
+                                @let nameField = item.get('name');
+        
+                                @if(nameField?.hasError('required')){
+                                    <mat-error class="body-3">
+                                        Name is required
+                                    </mat-error>
+                                }
+        
+                                @if(nameField?.hasError('minlength')){
+                                    <mat-error class="body-3">
+                                        Name must be at least 3 characters long
+                                    </mat-error>
+                                }
+        
+                                @if(nameField?.hasError('maxlength')){
+                                    <mat-error class="body-3">
+                                        Name cannot exceed 30 characters
+                                    </mat-error>
+                                }
+                            </mat-form-field>
+                            <div class="flex gap-3 w-full sm:w-1/3">
+                                <mat-form-field class="w-1/2">
+                                    <mat-label>Count</mat-label>
+                                    <input matInput type="number" placeholder="Count" formControlName="count" />
+                                    @let countField = item.get('count');
+                                    @if(countField?.hasError('required')){
+                                        <mat-error class="body-3">
+                                            Count is required
+                                        </mat-error>
+                                    }
+        
+                                    @if(countField?.hasError('min')){
+                                        <mat-error class="body-3">
+                                            Minimum count is 1
+                                        </mat-error>
+                                    }
+        
+                                    @if(countField?.hasError('max')){
+                                        <mat-error class="body-3">
+                                            Maximum count is 100
+                                        </mat-error>
+                                    }
+        
+                                    @if(countField?.hasError('pattern')){
+                                        <mat-error class="body-3">
+                                            Count must be a valid number
+                                        </mat-error>
+                                    }
+                                </mat-form-field>
+                                <mat-form-field class="w-1/2">
+                                    <mat-label>Price</mat-label>
+                                    <input matInput type="number" placeholder="Price" formControlName="price" />
+                                    @let priceField = item.get('price');
+                                    @if(priceField?.hasError('required')){
+                                        <mat-error class="body-3">
+                                            Price is required
+                                        </mat-error>
+                                    }
+        
+                                    @if(priceField?.hasError('min')){
+                                        <mat-error class="body-3">
+                                            Minimum price is 1
+                                        </mat-error>
+                                    }
+        
+                                    @if(priceField?.hasError('max')){
+                                        <mat-error class="body-3">
+                                            Maximum price is 1,000,000
+                                        </mat-error>
+                                    }
+        
+                                    @if(priceField?.hasError('pattern')){
+                                        <mat-error class="body-3">
+                                            Price must be a valid number
+                                        </mat-error>
+                                    }
+                                </mat-form-field>
+                            </div>
+        
+                        </div>
+                        <button class="flex cursor-pointer" aria-label="Remove Item Icon" (click)="removeItem($index)" type="button">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                }
+            }
+        </div>
+        <div class="mt-12 flex gap-4">
+            <button mat-stroked-button type="button" (click)="addItem()">Add Item</button>
+            <button mat-flat-button type="submit" (submit)="addInvoice()">Add Invoice</button>
+        </div>
+        <p class="body-3 text-red-500 my-4 flex items-center gap-2">
+            @if(noItemsAdded()){
+                <mat-icon>info</mat-icon>
+                Please add items.
+            }
+        </p>
+    </form>
+</app-frame>

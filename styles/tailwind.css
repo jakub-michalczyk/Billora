@@ -1,3 +1,5 @@
 @theme {
   --color-orange-350:  #F7AD73;
+  --color-gray-550: #a7a7a7;
+  --background-image-dots: url('/images/dots.png');
 }

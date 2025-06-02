@@ -1,1 +1,10 @@
-<app-top-bar></app-top-bar>
+<div class="min-h-screen flex flex-col relative bg-dots bg-no-repeat bg-right-bottom">
+    <app-top-bar class="absolute top-0 left-0 w-full"></app-top-bar>
+    <div class="flex flex-1 overflow-auto items-center py-28">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="hidden lg:block absolute left-1/2 -translate-x-1/2 -bottom-10">
+        <img src="/images/ellipse.png" />
+    </div>
+</div>
+
