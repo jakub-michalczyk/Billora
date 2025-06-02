@@ -1,0 +1,27 @@
+<div class="w-full flex justify-between sm:items-center px-6 sm:px-12 py-6">
+    <div class="w-37">
+        <img class="w-full" src="images/logo.svg" alt="Logo" />
+    </div>
+
+    <nav>
+        <ul class="gap-3 sm:gap-12 flex-col sm:flex-row flex">
+            @for(route of routes(); track $index) {
+                <a class="block sm:inline" [routerLink]="route.path">
+                    <li class="hidden sm:inline-block">
+                        {{ route.label }}
+                        @if(route.isActive){
+                            <div class="w-1 h-1 mx-auto bg-orange-350 rounded-full"></div>
+                        }                    
+                    </li>
+
+                    @if(route.isActive){
+                        <button class="!block sm:!hidden w-full" mat-flat-button>{{ route.label }}</button>
+                    }
+                    @else {
+                        <button class="!block sm:!hidden w-full" mat-stroked-button>{{ route.label }}</button>  
+                    }
+                </a>
+            }
+        </ul>
+    </nav>
+</div>
