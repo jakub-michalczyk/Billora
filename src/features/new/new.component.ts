@@ -87,7 +87,9 @@ export class NewComponent {
       return;
     }
 
-    this.router.navigate(['/summary']);
+    this.router.navigate(['/summary'], {
+      state: { items: this.form.value.items }
+    });
   }
 
   private hasAtLeastOneValidItem(): boolean {

@@ -11,6 +11,10 @@
     container-shape: variables.$corners
 ));
 
+@include mat.progress-spinner-overrides((
+    active-indicator-color: variables.$rajah,
+));
+
 .mdc-text-field {
     &--filled:not(&--disabled) {
         background-color: variables.$white !important;
